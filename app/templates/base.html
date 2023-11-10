@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RidePass</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        /* margin: 0; */
+        /* padding: 0; */
+        background-color: rgb(238, 238, 238);
+        color: rgb(0, 0, 0);
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        min-height: 100vh;
+        flex-direction: column;
+        /* text-align: center; */
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .nav-bar-list {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-bar-list-item {
+        & .nav-bar-list-item-link {
+          text-decoration: none;
+        }
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="nav-bar-list">
+          <li class="nav-bar-list-item">
+            <a class="nav-bar-list-item-link" href="{{ url_for('index') }}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-bar-list-item">
+            {% if current_user.is_anonymous %}
+            <a class="nav-bar-list-item-link" href="{{ url_for('login') }}"
+              >Login</a
+            >
+            {% else %}
+            <a class="nav-bar-list-item-link" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+            {% endif%}
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <h1>Ridesharing Platform</h1>
+    {% if title %}
+    <h2>{{title}}</h2>
+    {% endif %}
+    <hr />
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,4 @@
+1. why cannt use render_template in app/routes.py in case of redirect
+2. pip install werkzeug==2.2.2
+3. what if there are more users with the same name app/routes.py
+4. requirements.txt
